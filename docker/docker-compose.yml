@@ -1,0 +1,29 @@
+services:
+  # Collect and store metrics from monitoring targets
+  prometheus:
+    image: prom/prometheus:v3.12.0
+    container_name: prometheus
+    env_file:
+      - ../.env
+    restart: unless-stopped
+    ports:
+      - "${PROMETHEUS_PORT}:9090"
+    volumes:
+      - ../prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+    depends_on:
+      - node-exporter
+
+  # Expose Linux host metrics for prometheus to collect
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:v1.12.1
+    container_name: node-exporter
+    restart: unless-stopped
+    ports:
+      - "9100:9100"
+
+volumes:
+  prometheus-data:
