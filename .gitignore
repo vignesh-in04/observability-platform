@@ -1,0 +1,77 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Secrets and credentials
+secrets/
+*.secret
+*.key
+*.pem
+*.p12
+*.pfx
+
+# TLS certificates
+*.crt
+*.csr
+
+# Runtime data
+data/
+runtime/
+tmp/
+
+# Application logs
+logs/
+*.log
+
+# Prometheus data
+prometheus/data/
+
+# Grafana data
+grafana/data/
+
+# Loki data
+loki/data/
+
+# Tempo data
+tempo/data/
+
+# OpenTelemetry data
+opentelemetry/data/
+
+# Backups
+backups/
+*.tar
+*.tar.gz
+*.zip
+
+# Local Docker files
+docker/.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Terraform state 
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!example.tfvars
