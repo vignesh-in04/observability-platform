@@ -18,4 +18,6 @@ scrape_configs:
     static_configs:
       - targets:
           - node-exporter:9100
+          # Replace this tag with server private IP (Note: If backend and monitoring server are in different VPC, use public IP with restricted SG)
+          - <BACKEND_NODE_EXPORTER_IP1>:9100 
 
