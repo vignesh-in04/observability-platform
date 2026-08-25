@@ -10,8 +10,8 @@ scrape_configs:
       - targets:
           - prometheus:9090
         labels:
-          server_name: <client-instance id>
-          environment: <production/staging/uat/development>
+          server_name: prometheus
+          environment: <env>
 
   - job_name: cadvisor
     scrape_interval: 10s
@@ -19,31 +19,38 @@ scrape_configs:
       - targets:
           - cadvisor:8080
         labels:
-          server_name: <monitoring-server>
-          environment: monitoring
+          server_name: monitoring
+          environment: <env>
 
       - targets:
           - <BACKEND_CADVISOR_IP1>:8080 
         labels:
           server_name: <backend-server>
-          environment: <production/staging/uat/development>
+          environment: <env>
 
-  
   # Node exporter for monitoring server itself
   - job_name: node
     static_configs:
       - targets:
           - node-exporter:9100
         labels:
-          server_name: <monitoring-server>
-          environment: monitoring
+          server_name: monitoring
+          environment: <env>
 
       # Replace this tag with server private IP (Note: If backend and monitoring server are in different VPC, use public IP with restricted SG)
       - targets:
           - <BACKEND_NODE_EXPORTER_IP1>:9100 
         labels:
           server_name: <backend-server>
-          environment: <production/staging/uat/development>
+          environment: <env>
+
+  - job_name: grafana
+    static_configs:
+      - targets:
+          - grafana:3000
+        labels:
+          server_name: monitoring
+          environment: monitoring
         
 
 
