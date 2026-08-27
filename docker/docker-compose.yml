@@ -74,9 +74,16 @@ services:
     image: grafana/loki:3.6.0
     container_name: loki
     restart: unless-stopped
+    user: "0"
     ports:
       - "3100:3100"
+    volumes:
+      - ../loki/config/loki.yml:/etc/loki/loki.yml:ro
+      - loki-data:/loki
+    command:
+      - "-config.file=/etc/loki/loki.yml"
 
 volumes:
   prometheus-data:
   grafana-data:
+  loki-data:
